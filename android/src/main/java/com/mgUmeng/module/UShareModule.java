@@ -59,7 +59,25 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
         return "umengShareApi";
     }
 
+    @ReactMethod
+    public void setAppKey(String appkey) {
 
+    }
+
+    @ReactMethod
+    public void setWXAppId(String appid, String secret) {
+        PlatformConfig.setWeixin(appid, secret);
+    }
+
+    @ReactMethod
+    public void setQQZone(String appid, String secret) {
+        PlatformConfig.setQQZone(appid, secret);
+    }
+
+    @ReactMethod
+    public void setSinaWeibo(String appkey, String secret) {
+        PlatformConfig.setSinaWeibo(appkey, secret);
+    }
     /**
      * 分享手机本地图片
      */
