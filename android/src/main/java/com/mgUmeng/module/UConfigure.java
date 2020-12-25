@@ -9,11 +9,16 @@ import android.os.Build.VERSION_CODES;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
-
+import com.umeng.socialize.UMShareAPI;
 /**
  * uShare config
  */
 public class UConfigure {
+
+    public static UMShareAPI get(Context context){
+        return UMShareAPI.get(context);
+    }
+
     public static void init(Context context, String appkey, String channel, int type, String secret){
         initRN("react-native","2.0");
         Config.shareType = "react native";
@@ -38,7 +43,7 @@ public class UConfigure {
     public static void  setQQZone(String s1,String s2){
         PlatformConfig.setQQZone(s1, s2);
     }
-    public static void  setSinaWeibo(String s1,String s2){
-        PlatformConfig.setSinaWeibo(s1, s2);
+    public static void  setSinaWeibo(String s1,String s2,String s3){
+        PlatformConfig.setSinaWeibo(s1, s2,s3);
     }
 }
