@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * Created by Song on 2017/7/10.
  */
-public class ShareModule extends ReactContextBaseJavaModule implements ActivityEventListener {
+public class UShareModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
     private Context context;
     private static Activity mActivity;
@@ -45,7 +45,7 @@ public class ShareModule extends ReactContextBaseJavaModule implements ActivityE
         mActivity = activity;
     }
 
-    public ShareModule(ReactApplicationContext reactContext) {
+    public UShareModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.context = reactContext;
     }
@@ -56,7 +56,7 @@ public class ShareModule extends ReactContextBaseJavaModule implements ActivityE
 
     @Override
     public String getName() {
-        return "sharemodule";
+        return "umengShareApi";
     }
 
 
