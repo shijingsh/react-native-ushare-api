@@ -1,0 +1,33 @@
+{
+  "name": "react-native-customized-image-picker",
+  "version": "1.1.0",
+  "description": "Select single or multiple images, with croping option",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liukefu2050/react-native-customized-image-picker"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "react-native",
+    "image",
+    "picker",
+    "crop",
+    "cropping",
+    "multiple",
+    "camera"
+  ],
+  "author": "Ivan Pusic,liukefu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liukefu2050/react-native-customized-image-picker/issues"
+  },
+  "homepage": "https://github.com/liukefu2050/react-native-customized-image-picker#readme",
+  "peerDependencies": {
+    "react-native": ">=0.33.0"
+  }
+}
