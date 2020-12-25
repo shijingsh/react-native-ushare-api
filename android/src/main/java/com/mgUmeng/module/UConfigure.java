@@ -15,8 +15,8 @@ import com.umeng.socialize.UMShareAPI;
  */
 public class UConfigure {
 
-    public static UMShareAPI get(Context context){
-        return UMShareAPI.get(context);
+    public static void onActivityResult(Context context,int requestCode, int resultCode, Intent data){
+        UMShareAPI.get(context).onActivityResult(requestCode, resultCode, data);
     }
 
     public static void init(Context context, String appkey, String channel, int type, String secret){
