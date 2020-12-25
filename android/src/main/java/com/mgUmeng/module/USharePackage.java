@@ -15,7 +15,7 @@ public class USharePackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new ShareModule(reactContext));
+        modules.add(new UShareModule(reactContext));
         return modules;
     }
 
