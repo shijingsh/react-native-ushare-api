@@ -1,4 +1,4 @@
-package com.mgUment.module.utils;
+package com.mgUmeng.module.utils;
 
 /**
  * 图片工具类

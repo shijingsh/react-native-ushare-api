@@ -1,4 +1,4 @@
-package com.mgUment.wxapi;
+package com.mgUmeng.wxapi;
 
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseResp;

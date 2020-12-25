@@ -1,4 +1,4 @@
-package com.mgUment.module;
+package com.mgUmeng.module;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,7 +20,7 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.mgUment.module.utils.BitMapUtil;
+import com.mgUmeng.module.utils.BitMapUtil;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;

@@ -1,4 +1,4 @@
-package com.mgUment.module;
+package com.mgUmeng.module;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
