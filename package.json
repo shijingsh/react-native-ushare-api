@@ -1,29 +1,29 @@
 {
-  "name": "reactNativeUmengShare",
+  "name": "react-native-ushare-api",
   "version": "1.1.0",
-  "description": "react-native umeng share",
+  "description": "react-native umeng share api",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shijingsh/reactNativeUmengShare"
+    "url": "git+https://github.com/shijingsh/react-native-ushare-api"
   },
   "keywords": [
     "react",
     "native",
     "react-native",
     "umeng",
-    "umeng share"
+    "umeng share api"
   ],
   "author": "liukefu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shijingsh/reactNativeUmengShare/issues"
+    "url": "https://github.com/shijingsh/react-native-ushare-api/issues"
   },
-  "homepage": "https://github.com/shijingsh/reactNativeUmengShare#readme",
+  "homepage": "https://github.com/shijingsh/react-native-ushare-api#readme",
   "peerDependencies": {
-    "react-native": ">=0.62.0"
+    "react-native": ">=0.60.0"
   }
 }
