@@ -7,7 +7,7 @@
                 android:value="${UmengAppKey}"></meta-data>
 
         <activity
-                android:name=".wxapi.WXEntryActivity"
+                android:name="com.mgUmeng.module.wxapi.WXEntryUShareActivity"
                 android:configChanges="keyboardHidden|orientation|screenSize"
                 android:exported="true"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar" />

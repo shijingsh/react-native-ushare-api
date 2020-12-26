@@ -1,11 +1,11 @@
-package com.mgUmeng.wxapi;
+package com.mgUmeng.module.wxapi;
 
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.umeng.socialize.weixin.view.WXCallbackActivity;
 
-public class WXEntryActivity extends WXCallbackActivity {
+public class WXEntryUShareActivity extends WXCallbackActivity {
 
     public void onResp(BaseResp resp) {
         if (resp.getType() == ConstantsAPI.COMMAND_LAUNCH_WX_MINIPROGRAM) {
