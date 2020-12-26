@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build.VERSION_CODES;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.Config;

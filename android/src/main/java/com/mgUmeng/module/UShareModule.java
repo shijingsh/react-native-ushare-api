@@ -21,6 +21,7 @@ import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.mgUmeng.module.utils.BitMapUtil;
+import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -32,9 +33,7 @@ import com.umeng.socialize.media.UMWeb;
 
 import java.util.Map;
 
-/**
- * Created by Song on 2017/7/10.
- */
+
 public class UShareModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
     private Context context;
@@ -75,8 +74,8 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
     }
 
     @ReactMethod
-    public void setSinaWeibo(String appkey, String secret) {
-        PlatformConfig.setSinaWeibo(appkey, secret);
+    public void setSinaWeibo(String appkey, String secret,String s3) {
+        PlatformConfig.setSinaWeibo(appkey, secret,s3);
     }
     /**
      * 分享手机本地图片

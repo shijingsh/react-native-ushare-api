@@ -50,10 +50,57 @@ yarn add react-native-ushare-api
 ```
 
 #### android
+```
+import com.mgUmeng.module.wxapi.WXEntryUShareActivity;
 
-#### add permission <yourExample>/android/app/src/main/AndroidManifest.xml
+public class WXEntryActivity extends WXEntryUShareActivity {
+}
+```
 
 
+#### add action in AndroidManifest.xml
+
+```
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+```
+
+#### add init in activity
+```
+  public void onCreate(Bundle savedInstanceState) {
+
+    super.onCreate(savedInstanceState);
+
+    UShareModule.initActivity(this);
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    UConfigure.onActivityResult(this,requestCode, resultCode, data);
+  }
+```
+
+```
+ public void onCreate() {
+        super.onCreate();
+        SoLoader.init(this, /* native exopackage */ false);
+        initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+
+        //Config.shareType = "react native";
+        // 初始化Umeng分享
+        UConfigure.init(this, "9636538", "umeng", 1, "");
+    }
+
+    {
+        UConfigure.setWeixin("", "");
+        UConfigure.setQQZone("", "");
+        UConfigure.setSinaWeibo("", "", "www.baidu.com");
+    }
+```
 ### iOS
 
 
