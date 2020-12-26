@@ -1,12 +1,9 @@
 //
-//  RCTUmengShareApi.m
-//  RCTUmengShareApi
-//
-//  Created by 李响 on 16/5/13.
-//  Copyright © 2016年 lixiang. All rights reserved.
-//
+//  RCTumengShareApi.m
+//  RCTumengShareApi
 
-#import "RCTUmengShareApi.h"
+
+#import "RCTumengShareApi.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
@@ -17,14 +14,14 @@
 #import "RCTConvert.h"
 #import "WXApi.h"
 
-static RCTUmengShareApi *_instance = nil;
+static RCTumengShareApi *_instance = nil;
 
-@interface RCTUmengShareApi ()<UMSocialUIDelegate>
+@interface RCTumengShareApi ()<UMSocialUIDelegate>
 @property (weak,nonatomic) UIViewController* rootViewController;
 @property (strong,nonatomic) NSString* umengAppKey;
 @end
 
-@implementation RCTUmengShareApi
+@implementation RCTumengShareApi
 @synthesize bridge = _bridge;
 + (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
@@ -49,7 +46,7 @@ static RCTUmengShareApi *_instance = nil;
 
 +(void)setRootController:(UIViewController *)rootController
 {
-    [RCTUmengShareApi sharedInstance].rootViewController = rootController;
+    [RCTumengShareApi sharedInstance].rootViewController = rootController;
 }
 RCT_EXPORT_MODULE()
 
@@ -101,7 +98,7 @@ RCT_EXPORT_METHOD(setQQData:(NSDictionary*)dic)
 {
 
     RCTImageSource* source = [RCTConvert RCTImageSource:[dic objectForKey:@"imageSource"]];
-    __weak RCTUmengShareApi *weakSelf = self;
+    __weak RCTumengShareApi *weakSelf = self;
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:source.imageURL.absoluteString]];
     [self.bridge.imageLoader loadImageWithURLRequest:urlRequest
                                             callback:^(NSError *error, UIImage *image) {
@@ -127,7 +124,7 @@ RCT_EXPORT_METHOD(setQQData:(NSDictionary*)dic)
 RCT_EXPORT_METHOD(setQzoneData:(NSDictionary*)dic)
 {
     RCTImageSource* source = [RCTConvert RCTImageSource:[dic objectForKey:@"imageSource"]];
-    __weak RCTUmengShareApi *weakSelf = self;
+    __weak RCTumengShareApi *weakSelf = self;
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:source.imageURL.absoluteString]];
     [self.bridge.imageLoader loadImageWithURLRequest:urlRequest
                                             callback:^(NSError *error, UIImage *image) {
@@ -151,7 +148,7 @@ RCT_EXPORT_METHOD(setQzoneData:(NSDictionary*)dic)
 RCT_EXPORT_METHOD(setWechatSessionData:(NSDictionary*)dic)
 {
     RCTImageSource* source = [RCTConvert RCTImageSource:[dic objectForKey:@"imageSource"]];
-    __weak RCTUmengShareApi *weakSelf = self;
+    __weak RCTumengShareApi *weakSelf = self;
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:source.imageURL.absoluteString]];
     [self.bridge.imageLoader loadImageWithURLRequest:urlRequest
                                             callback:^(NSError *error, UIImage *image) {
@@ -176,7 +173,7 @@ RCT_EXPORT_METHOD(setWechatSessionData:(NSDictionary*)dic)
 RCT_EXPORT_METHOD(setWechatTimelineData:(NSDictionary*)dic)
 {
     RCTImageSource* source = [RCTConvert RCTImageSource:[dic objectForKey:@"imageSource"]];
-    __weak RCTUmengShareApi *weakSelf = self;
+    __weak RCTumengShareApi *weakSelf = self;
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:source.imageURL.absoluteString]];
     [self.bridge.imageLoader loadImageWithURLRequest:urlRequest
                                             callback:^(NSError *error, UIImage *image) {
@@ -201,7 +198,7 @@ RCT_EXPORT_METHOD(setWechatTimelineData:(NSDictionary*)dic)
 RCT_EXPORT_METHOD(setWechatFavoriteData:(NSDictionary*)dic)
 {
     RCTImageSource* source = [RCTConvert RCTImageSource:[dic objectForKey:@"imageSource"]];
-    __weak RCTUmengShareApi *weakSelf = self;
+    __weak RCTumengShareApi *weakSelf = self;
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:source.imageURL.absoluteString]];
     [self.bridge.imageLoader loadImageWithURLRequest:urlRequest
                                             callback:^(NSError *error, UIImage *image) {
@@ -226,7 +223,7 @@ RCT_EXPORT_METHOD(setWechatFavoriteData:(NSDictionary*)dic)
 RCT_EXPORT_METHOD(setSinaData:(NSDictionary*)dic)
 {
     RCTImageSource* source = [RCTConvert RCTImageSource:[dic objectForKey:@"imageSource"]];
-    __weak RCTUmengShareApi *weakSelf = self;
+    __weak RCTumengShareApi *weakSelf = self;
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:source.imageURL.absoluteString]];
     [self.bridge.imageLoader loadImageWithURLRequest:urlRequest
                                             callback:^(NSError *error, UIImage *image) {
