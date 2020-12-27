@@ -80,8 +80,8 @@ RCT_EXPORT_MODULE();
       return UMSocialPlatformType_Flickr;
     case 27:
       return UMSocialPlatformType_Tumblr;
-    case 28:
-      return UMSocialPlatformType_AlipaySession;
+    //case 28:
+    //  return UMSocialPlatformType_AlipaySession;
     case 29:
       return UMSocialPlatformType_KakaoTalk;
     case 30:
@@ -100,11 +100,11 @@ RCT_EXPORT_MODULE();
 - (void)shareWithText:(NSString *)text icon:(NSString *)icon link:(NSString *)link title:(NSString *)title platform:(NSInteger)platform completion:(UMSocialRequestCompletionHandler)completion
 {
   UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-  
+
   if (link.length > 0) {
     UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:title descr:text thumImage:icon];
     shareObject.webpageUrl = link;
-    
+
     messageObject.shareObject = shareObject;
   } else if (icon.length > 0) {
     id img = nil;
@@ -121,7 +121,7 @@ RCT_EXPORT_MODULE();
     shareObject.thumbImage = img;
     shareObject.shareImage = img;
     messageObject.shareObject = shareObject;
-    
+
     messageObject.text = text;
   } else if (text.length > 0) {
     messageObject.text = text;
@@ -131,9 +131,9 @@ RCT_EXPORT_MODULE();
       return;
     }
   }
-  
+
   [[UMSocialManager defaultManager] shareToPlatform:platform messageObject:messageObject currentViewController:nil completion:completion];
-  
+
 }
 
 RCT_EXPORT_METHOD(share:(NSString *)text icon:(NSString *)icon link:(NSString *)link title:(NSString *)title platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
@@ -145,7 +145,7 @@ RCT_EXPORT_METHOD(share:(NSString *)text icon:(NSString *)icon link:(NSString *)
       return;
     }
   }
-  
+
   [self shareWithText:text icon:icon link:link title:title platform:plf completion:^(id result, NSError *error) {
     if (completion) {
       if (error) {
@@ -165,7 +165,7 @@ RCT_EXPORT_METHOD(share:(NSString *)text icon:(NSString *)icon link:(NSString *)
       }
     }
   }];
-  
+
 }
 
 RCT_EXPORT_METHOD(shareboard:(NSString *)text icon:(NSString *)icon link:(NSString *)link title:(NSString *)title platform:(NSArray *)platforms completion:(RCTResponseSenderBlock)completion)
@@ -210,7 +210,7 @@ RCT_EXPORT_METHOD(auth:(NSInteger)platform completion:(RCTResponseSenderBlock)co
       return;
     }
   }
-  
+
   [[UMSocialManager defaultManager] getUserInfoWithPlatform:plf currentViewController:nil completion:^(id result, NSError *error) {
     if (completion) {
       if (error) {
@@ -227,7 +227,7 @@ RCT_EXPORT_METHOD(auth:(NSInteger)platform completion:(RCTResponseSenderBlock)co
         completion(@[@(stCode), @{}, msg]);
       } else {
         UMSocialUserInfoResponse *authInfo = result;
-        
+
         NSMutableDictionary *retDict = [NSMutableDictionary dictionaryWithCapacity:8];
         retDict[@"uid"] = authInfo.uid;
         retDict[@"openid"] = authInfo.openid;
@@ -235,20 +235,20 @@ RCT_EXPORT_METHOD(auth:(NSInteger)platform completion:(RCTResponseSenderBlock)co
         retDict[@"accessToken"] = authInfo.accessToken;
         retDict[@"refreshToken"] = authInfo.refreshToken;
         retDict[@"expiration"] = authInfo.expiration;
-        
+
         retDict[@"name"] = authInfo.name;
         retDict[@"iconurl"] = authInfo.iconurl;
         retDict[@"gender"] = authInfo.unionGender;
-        
+
         NSDictionary *originInfo = authInfo.originalResponse;
         retDict[@"city"] = originInfo[@"city"];
         retDict[@"province"] = originInfo[@"province"];
         retDict[@"country"] = originInfo[@"country"];
-        
+
         completion(@[@200, retDict, @""]);
       }
     }
   }];
-  
+
 }
 @end

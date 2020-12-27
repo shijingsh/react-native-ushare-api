@@ -1,7 +1,7 @@
-#import "CjUmengShare.h"
+#import "RCTumengShareApi.h"
 
 
-@implementation CjUmengShare
+@implementation RCTumengShareApi
 
 RCT_EXPORT_MODULE()
 

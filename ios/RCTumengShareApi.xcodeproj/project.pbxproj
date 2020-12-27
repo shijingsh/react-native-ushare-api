@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8F59F35A2486517F00D09DE8 /* UMShareModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F3592486517F00D09DE8 /* UMShareModule.m */; };
-		B3E7B58A1CC2AC0600A0062D /* CjUmengShare.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* CjUmengShare.m */; };
+		B3E7B58A1CC2AC0600A0062D /* RCTumengShareApi.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RCTumengShareApi.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,8 +27,8 @@
 		134814201AA4EA6300B7C361 /* libCjUmengShare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCjUmengShare.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F59F3582486517F00D09DE8 /* UMShareModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMShareModule.h; sourceTree = "<group>"; };
 		8F59F3592486517F00D09DE8 /* UMShareModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMShareModule.m; sourceTree = "<group>"; };
-		B3E7B5881CC2AC0600A0062D /* CjUmengShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CjUmengShare.h; sourceTree = "<group>"; };
-		B3E7B5891CC2AC0600A0062D /* CjUmengShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CjUmengShare.m; sourceTree = "<group>"; };
+		B3E7B5881CC2AC0600A0062D /* RCTumengShareApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTumengShareApi.h; sourceTree = "<group>"; };
+		B3E7B5891CC2AC0600A0062D /* RCTumengShareApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTumengShareApi.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +55,8 @@
 			children = (
 				8F59F3582486517F00D09DE8 /* UMShareModule.h */,
 				8F59F3592486517F00D09DE8 /* UMShareModule.m */,
-				B3E7B5881CC2AC0600A0062D /* CjUmengShare.h */,
-				B3E7B5891CC2AC0600A0062D /* CjUmengShare.m */,
+				B3E7B5881CC2AC0600A0062D /* RCTumengShareApi.h */,
+				B3E7B5891CC2AC0600A0062D /* RCTumengShareApi.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,9 +64,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* CjUmengShare */ = {
+		58B511DA1A9E6C8500147676 /* RCTumengShareApi */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "CjUmengShare" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RCTumengShareApi" */;
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
@@ -76,7 +76,7 @@
 			);
 			dependencies = (
 			);
-			name = CjUmengShare;
+			name = RCTumengShareApi;
 			productName = RCTDataManager;
 			productReference = 134814201AA4EA6300B7C361 /* libCjUmengShare.a */;
 			productType = "com.apple.product-type.library.static";
@@ -95,7 +95,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "CjUmengShare" */;
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RCTumengShareApi" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -108,7 +108,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* CjUmengShare */,
+				58B511DA1A9E6C8500147676 /* RCTumengShareApi */,
 			);
 		};
 /* End PBXProject section */
@@ -118,7 +118,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E7B58A1CC2AC0600A0062D /* CjUmengShare.m in Sources */,
+				B3E7B58A1CC2AC0600A0062D /* RCTumengShareApi.m in Sources */,
 				8F59F35A2486517F00D09DE8 /* UMShareModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,7 +230,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = CjUmengShare;
+				PRODUCT_NAME = RCTumengShareApi;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -246,7 +246,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = CjUmengShare;
+				PRODUCT_NAME = RCTumengShareApi;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -254,7 +254,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "CjUmengShare" */ = {
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RCTumengShareApi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511ED1A9E6C8500147676 /* Debug */,
@@ -263,7 +263,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "CjUmengShare" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RCTumengShareApi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,
