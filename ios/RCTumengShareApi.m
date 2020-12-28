@@ -11,7 +11,7 @@
 #import <UShareUI/UShareUI.h>
 #import <React/RCTConvert.h>
 #import <React/RCTEventDispatcher.h>
-
+#import <WXApi.h>
 @implementation RCTumengShareApi
 
 RCT_EXPORT_MODULE();
@@ -136,6 +136,8 @@ RCT_EXPORT_MODULE();
 
 }
 
+
+
 RCT_EXPORT_METHOD(share:(NSString *)text icon:(NSString *)icon link:(NSString *)link title:(NSString *)title platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
 {
   UMSocialPlatformType plf = [self platformType:platform];
@@ -201,7 +203,47 @@ RCT_EXPORT_METHOD(shareboard:(NSString *)text icon:(NSString *)icon link:(NSStri
 }
 
 
-RCT_EXPORT_METHOD(auth:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
+RCT_EXPORT_METHOD(openWeixinApp:(NSString *)appId path:(NSString *)path userName:(NSString *)userName  platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
+{
+
+    //[WXApi registerApp:appId universalLink:@"aaa"];
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    WXMiniProgramObject * miniObject = [WXMiniProgramObject object];
+    [miniObject setPath:@""];
+    [miniObject setUserName:@""];
+    [miniObject setWebpageUrl:@""];
+    //[miniObject setMiniProgramType:(WXMiniProgramType)]
+
+    miniObject.miniProgramType = WXMiniProgramTypeRelease;
+
+    messageObject.shareObject = miniObject;
+
+    [[UMSocialManager defaultManager] shareToPlatform:platform messageObject:messageObject currentViewController:nil completion:^(id result, NSError *error) {
+        if (completion) {
+          if (error) {
+            NSString *msg = error.userInfo[@"NSLocalizedFailureReason"];
+            if (!msg) {
+              msg = error.userInfo[@"message"];
+            }if (!msg) {
+              msg = @"share failed";
+            }
+            NSInteger stcode =error.code;
+            if(stcode == 2009){
+             stcode = -1;
+            }
+            completion(@[@(stcode), msg]);
+          } else {
+            completion(@[@200, @"share success"]);
+          }
+        }
+    }];
+
+
+}
+
+
+RCT_EXPORT_METHOD(authLogin:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
 {
   UMSocialPlatformType plf = [self platformType:platform];
   if (plf == UMSocialPlatformType_UnKnown) {
@@ -229,16 +271,16 @@ RCT_EXPORT_METHOD(auth:(NSInteger)platform completion:(RCTResponseSenderBlock)co
         UMSocialUserInfoResponse *authInfo = result;
 
         NSMutableDictionary *retDict = [NSMutableDictionary dictionaryWithCapacity:8];
-        retDict[@"uid"] = authInfo.uid;
-        retDict[@"openid"] = authInfo.openid;
-        retDict[@"unionid"] = authInfo.unionId;
-        retDict[@"accessToken"] = authInfo.accessToken;
-        retDict[@"refreshToken"] = authInfo.refreshToken;
-        retDict[@"expiration"] = authInfo.expiration;
+          retDict[@"userId"] = authInfo.uid;
+          retDict[@"openid"] = authInfo.openid;
+          retDict[@"unionid"] = authInfo.unionId;
+          retDict[@"accessToken"] = authInfo.accessToken;
+          retDict[@"refreshToken"] = authInfo.refreshToken;
+          retDict[@"expiration"] = authInfo.expiration;
 
-        retDict[@"name"] = authInfo.name;
-        retDict[@"iconurl"] = authInfo.iconurl;
-        retDict[@"gender"] = authInfo.unionGender;
+          retDict[@"userName"] = authInfo.name;
+          retDict[@"userAvatar"] = authInfo.iconurl;
+          retDict[@"userGender"] = authInfo.unionGender;
 
         NSDictionary *originInfo = authInfo.originalResponse;
         retDict[@"city"] = originInfo[@"city"];
@@ -249,6 +291,8 @@ RCT_EXPORT_METHOD(auth:(NSInteger)platform completion:(RCTResponseSenderBlock)co
       }
     }
   }];
+
+
 
 }
 @end

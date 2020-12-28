@@ -285,6 +285,8 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
                      */
                     result.putInt("code", 0);
                     result.putString("userId", map.get("uid"));
+                    result.putString("openid", map.get("openid"));
+                    result.putString("unionid", map.get("unionid"));
                     result.putString("accessToken", map.get("accesstoken"));
                     result.putString("userName", map.get("name"));
                     result.putString("userGender", map.get("gender"));
