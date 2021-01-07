@@ -16,7 +16,9 @@ Pod::Spec.new do |s|
 
   s.dependency "React"
 
-  s.dependency "UMCShare/UI"
+  s.dependency "UMCommon"
+  s.dependency "UMDevice"
+  s.dependency "UMCCommonLog"
   s.dependency "UMCShare/Social/WeChat"
   s.dependency "UMCShare/Social/ReducedQQ"
   s.dependency "UMCShare/Social/ReducedSina"
