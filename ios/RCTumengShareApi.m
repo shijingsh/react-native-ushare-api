@@ -8,7 +8,6 @@
 
 #import "RCTumengShareApi.h"
 #import <UMShare/UMShare.h>
-#import <UShareUI/UShareUI.h>
 #import <React/RCTConvert.h>
 #import <React/RCTEventDispatcher.h>
 #import <WXApi.h>
@@ -97,12 +96,12 @@ RCT_EXPORT_MODULE();
   }
 }
 
-- (void)shareWithText:(NSString *)text icon:(NSString *)icon link:(NSString *)link title:(NSString *)title platform:(NSInteger)platform completion:(UMSocialRequestCompletionHandler)completion
+- (void)shareWithText:(NSString *)text descr:(NSString *)descr icon:(NSString *)icon link:(NSString *)link platform:(NSInteger)platform completion:(UMSocialRequestCompletionHandler)completion
 {
   UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
 
   if (link.length > 0) {
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:title descr:text thumImage:icon];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:text descr:descr thumImage:icon];
     shareObject.webpageUrl = link;
 
     messageObject.shareObject = shareObject;
@@ -120,6 +119,7 @@ RCT_EXPORT_MODULE();
     UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
     shareObject.thumbImage = img;
     shareObject.shareImage = img;
+    shareObject.descr = descr;
     messageObject.shareObject = shareObject;
 
     messageObject.text = text;
@@ -138,7 +138,7 @@ RCT_EXPORT_MODULE();
 
 
 
-RCT_EXPORT_METHOD(share:(NSString *)text icon:(NSString *)icon link:(NSString *)link title:(NSString *)title platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
+RCT_EXPORT_METHOD(share:(NSString *)text descr:(NSString *)descr  icon:(NSString *)icon link:(NSString *)link platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
 {
   UMSocialPlatformType plf = [self platformType:platform];
   if (plf == UMSocialPlatformType_UnKnown) {
@@ -148,7 +148,7 @@ RCT_EXPORT_METHOD(share:(NSString *)text icon:(NSString *)icon link:(NSString *)
     }
   }
 
-  [self shareWithText:text icon:icon link:link title:title platform:plf completion:^(id result, NSError *error) {
+    [self shareWithText:text descr:descr icon:icon link:link platform:plf completion:^(id result, NSError *error) {
     if (completion) {
       if (error) {
         NSString *msg = error.userInfo[@"NSLocalizedFailureReason"];
@@ -168,38 +168,6 @@ RCT_EXPORT_METHOD(share:(NSString *)text icon:(NSString *)icon link:(NSString *)
     }
   }];
 
-}
-
-RCT_EXPORT_METHOD(shareboard:(NSString *)text icon:(NSString *)icon link:(NSString *)link title:(NSString *)title platform:(NSArray *)platforms completion:(RCTResponseSenderBlock)completion)
-{
-  NSMutableArray *plfs = [NSMutableArray array];
-  for (NSNumber *plf in platforms) {
-    [plfs addObject:@([self platformType:plf.integerValue])];
-  }
-  if (plfs.count > 0) {
-    [UMSocialUIManager setPreDefinePlatforms:plfs];
-  }
-  [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-    [self shareWithText:text icon:icon link:link title:title platform:platformType completion:^(id result, NSError *error) {
-      if (completion) {
-        if (error) {
-          NSString *msg = error.userInfo[@"NSLocalizedFailureReason"];
-          if (!msg) {
-            msg = error.userInfo[@"message"];
-          }if (!msg) {
-            msg = @"share failed";
-          }
-          NSInteger stcode =error.code;
-          if(stcode == 2009){
-            stcode = -1;
-          }
-          completion(@[@(stcode), msg]);
-        } else {
-          completion(@[@200, @"share success"]);
-        }
-      }
-    }];
-  }];
 }
 
 
