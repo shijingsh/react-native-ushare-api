@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   s.dependency "UMCommon"
   s.dependency "UMDevice"
-  s.dependency "WechatOpenSDK"
+  s.dependency "UMShare/Social/WeChat"
   s.dependency "UMShare/Social/ReducedQQ"
   s.dependency "UMShare/Social/ReducedSina"
 
