@@ -10,7 +10,8 @@
 #import <UMShare/UMShare.h>
 #import <React/RCTConvert.h>
 #import <React/RCTEventDispatcher.h>
-#import <WXApi.h>
+
+#import <UMShare/WXApi.h>
 @implementation RCTumengShareApi
 
 RCT_EXPORT_MODULE();
@@ -138,7 +139,7 @@ RCT_EXPORT_MODULE();
 
 
 
-RCT_EXPORT_METHOD(share:(NSString *)text descr:(NSString *)descr  icon:(NSString *)icon link:(NSString *)link platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
+RCT_EXPORT_METHOD(share:(NSString *)text descr:(NSString *)descr   link:(NSString *)link icon:(NSString *)icon platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
 {
   UMSocialPlatformType plf = [self platformType:platform];
   if (plf == UMSocialPlatformType_UnKnown) {
@@ -171,43 +172,18 @@ RCT_EXPORT_METHOD(share:(NSString *)text descr:(NSString *)descr  icon:(NSString
 }
 
 
-RCT_EXPORT_METHOD(openWeixinApp:(NSString *)appId path:(NSString *)path userName:(NSString *)userName  platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
+RCT_EXPORT_METHOD(openWeiapp:(NSString *)appId path:(NSString *)path userName:(NSString *)userName  platform:(NSInteger)miniProgramType completion:(RCTResponseSenderBlock)completion)
 {
 
-    //[WXApi registerApp:appId universalLink:@"aaa"];
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-
-    WXMiniProgramObject * miniObject = [WXMiniProgramObject object];
-    [miniObject setPath:@""];
-    [miniObject setUserName:@""];
-    [miniObject setWebpageUrl:@""];
-    //[miniObject setMiniProgramType:(WXMiniProgramType)]
-
-    miniObject.miniProgramType = WXMiniProgramTypeRelease;
-
-    messageObject.shareObject = miniObject;
-
-    [[UMSocialManager defaultManager] shareToPlatform:platform messageObject:messageObject currentViewController:nil completion:^(id result, NSError *error) {
+  WXLaunchMiniProgramReq *launchMiniProgramReq = [WXLaunchMiniProgramReq object];
+  launchMiniProgramReq.userName = userName;  //拉起的小程序的username
+  launchMiniProgramReq.path = path;    ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
+  launchMiniProgramReq.miniProgramType = miniProgramType; //拉起小程序的类型
+    return  [WXApi sendReq:launchMiniProgramReq completion:^(BOOL success)  {
         if (completion) {
-          if (error) {
-            NSString *msg = error.userInfo[@"NSLocalizedFailureReason"];
-            if (!msg) {
-              msg = error.userInfo[@"message"];
-            }if (!msg) {
-              msg = @"share failed";
-            }
-            NSInteger stcode =error.code;
-            if(stcode == 2009){
-             stcode = -1;
-            }
-            completion(@[@(stcode), msg]);
-          } else {
             completion(@[@200, @"share success"]);
-          }
         }
     }];
-
-
 }
 
 
