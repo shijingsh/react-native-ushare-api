@@ -85,8 +85,13 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
 
         final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
         if(UMShareAPI.get(mActivity).isInstall(mActivity, sharePlatform)) {
-            Bitmap img = BitmapFactory.decodeFile(BitMapUtil.getImageAbsolutePath(mActivity, Uri.parse(imgPath)));
-            final UMImage image = new UMImage(mActivity, BitMapUtil.ImageCompress(img));
+             UMImage image = null;
+            if(imgPath.startsWith("http")){
+                Bitmap img = BitmapFactory.decodeFile(BitMapUtil.getImageAbsolutePath(mActivity, Uri.parse(imgPath)));
+                image =  new UMImage(mActivity, BitMapUtil.ImageCompress(img));
+            }else{
+                image = new UMImage(mActivity, imgPath);
+            }
             new ShareAction(mActivity)
                     .setPlatform(sharePlatform)
                     .withMedia(image)
@@ -116,39 +121,71 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
     }
 
     /**
-     * 分享手机本地图片
+     * 分享文本
      */
     @ReactMethod
-    public void shareWebImg(String imgPath, final int platform, final Callback resultCallback) {
+    public void shareText(String text, final int platform, final Callback resultCallback) {
 
         final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
         if(UMShareAPI.get(mActivity).isInstall(mActivity, sharePlatform)) {
-            UMImage image = new UMImage(mActivity, imgPath);
-            new ShareAction(mActivity)
-                    .setPlatform(sharePlatform)
-                    .withMedia(image)
-                    .setCallback(new UMShareListener() {
-                        @Override
-                        public void onStart(SHARE_MEDIA share_media) {
-                            //分享开始的回调
-                        }
 
-                        @Override
-                        public void onResult(SHARE_MEDIA share_media) {
-                            resultCallback.invoke("分享成功");
-                        }
+            if(platform==0){
+                //qq 不支持存文本
+                UMImage image = new UMImage(mActivity, "https://www.xiushangsh.com/logo.png");
+                new ShareAction(mActivity)
+                        .setPlatform(sharePlatform)
+                        .withText(text)
+                        .withMedia(image)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+                                //分享开始的回调
+                            }
 
-                        @Override
-                        public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                            resultCallback.invoke("分享失败：" + throwable.getMessage());
-                        }
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+                                resultCallback.invoke("分享成功");
+                            }
 
-                        @Override
-                        public void onCancel(SHARE_MEDIA share_media) {
-                            resultCallback.invoke("取消分享");
-                        }
-                    })
-                    .share();
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                                resultCallback.invoke("分享失败：" + throwable.getMessage());
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+                                resultCallback.invoke("取消分享");
+                            }
+                        })
+                        .share();
+            }else{
+                new ShareAction(mActivity)
+                        .setPlatform(sharePlatform)
+                        .withText(text)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+                                //分享开始的回调
+                            }
+
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+                                resultCallback.invoke("分享成功");
+                            }
+
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                                resultCallback.invoke("分享失败：" + throwable.getMessage());
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+                                resultCallback.invoke("取消分享");
+                            }
+                        })
+                        .share();
+            }
+
         }
     }
 
