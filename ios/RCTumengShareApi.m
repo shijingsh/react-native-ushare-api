@@ -137,6 +137,37 @@ RCT_EXPORT_MODULE();
 
 }
 
+RCT_EXPORT_METHOD(shareText:(NSString *)text  platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
+{
+  UMSocialPlatformType plf = [self platformType:platform];
+  if (plf == UMSocialPlatformType_UnKnown) {
+    if (completion) {
+      completion(@[@(UMSocialPlatformType_UnKnown), @"invalid platform"]);
+      return;
+    }
+  }
+
+    [self shareWithText:text descr:nil icon:nil link:nil platform:plf completion:^(id result, NSError *error) {
+    if (completion) {
+      if (error) {
+        NSString *msg = error.userInfo[@"NSLocalizedFailureReason"];
+        if (!msg) {
+          msg = error.userInfo[@"message"];
+        }if (!msg) {
+          msg = @"share failed";
+        }
+        NSInteger stcode =error.code;
+        if(stcode == 2009){
+         stcode = -1;
+        }
+        completion(@[@(stcode), msg]);
+      } else {
+        completion(@[@200, @"share success"]);
+      }
+    }
+  }];
+
+}
 
 
 RCT_EXPORT_METHOD(share:(NSString *)text descr:(NSString *)descr   link:(NSString *)link icon:(NSString *)icon platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
@@ -239,4 +270,69 @@ RCT_EXPORT_METHOD(authLogin:(NSInteger)platform completion:(RCTResponseSenderBlo
 
 
 }
+
+
+//分享小程序
+RCT_EXPORT_METHOD(shareWeiapp:(NSString *)title descr:(NSString *)descr
+                  link:(NSString *)link icon:(NSString *)icon
+                  platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
+{
+    UMSocialPlatformType plf = [self platformType:platform];
+    if (plf == UMSocialPlatformType_UnKnown) {
+      if (completion) {
+        completion(@[@(UMSocialPlatformType_UnKnown), @"invalid platform"]);
+        return;
+      }
+    }
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:title descr:descr thumImage:[UIImage imageNamed:@"icon"]];
+    shareObject.webpageUrl = link;
+    shareObject.userName = @"gh_3ac2059ac66f";
+    shareObject.path = @"pages/page10007/page10007";
+    shareObject.hdImageData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"png"]];
+    shareObject.miniProgramType = UShareWXMiniProgramTypeRelease;
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:plf messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
+
+       
+    }];
+}
+
+    
+RCT_EXPORT_METHOD(shareImageToPlatformType:(UMSocialPlatformType)platformType withThumb:(id)thumb image:(id)image)
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    //创建图片内容对象
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    //如果有缩略图，则设置缩略图本地
+    shareObject.thumbImage = thumb;
+
+    [shareObject setShareImage:image];
+
+    // 设置Pinterest参数
+    if (platformType == UMSocialPlatformType_Pinterest) {
+       // messageObj.moreInfo = @{@"source_url": @"http://www.umeng.com",
+       //                         @"app_name": @"U-Share",
+       //                         @"suggested_board_name": @"UShareProduce",
+       //                         @"description": @"U-Share: best social bridge"};
+    }
+
+
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+
+       
+    }];
+}
+
+
 @end
