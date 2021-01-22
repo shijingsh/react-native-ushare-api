@@ -50,7 +50,7 @@ const SharePlatform = {
             "data.description",
             "webPageUrl",
             "thumbImageUrl",
-            2, //platform
+            SharePlatform.WECHAT, //platform
             (code, message) => {
                 //分享成功
                
@@ -59,7 +59,7 @@ const SharePlatform = {
 #### share text
 ```javascript
         UShare.shareText("title",
-            2, //platform
+            SharePlatform.WECHAT, //platform
             (code, message) => {
                 //分享成功
                
@@ -69,7 +69,7 @@ const SharePlatform = {
 #### share image
 ```javascript
         UShare.shareImg("url",
-            2, //platform
+            SharePlatform.WECHAT, //platform
             (code, message) => {
                 //分享成功
                
@@ -85,7 +85,18 @@ const SharePlatform = {
             (code, message) => {
               
             });
- ```           
+ ```       
+
+#### 微信授权信息
+```javascript
+         UShare.authLogin(SharePlatform.WECHAT, (result) => {
+             // code: 0成功
+             if(result.code === 0) {
+                 
+             }
+         });
+ ```      
+    
 ## Install
 
 ```
