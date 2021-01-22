@@ -160,9 +160,9 @@ RCT_EXPORT_METHOD(shareText:(NSString *)text  platform:(NSInteger)platform compl
         if(stcode == 2009){
          stcode = -1;
         }
-        completion(@[@(stcode), msg]);
+        completion(@[msg]);
       } else {
-        completion(@[@200, @"share success"]);
+        completion(@[@"share success"]);
       }
     }
   }];
@@ -175,7 +175,7 @@ RCT_EXPORT_METHOD(share:(NSString *)text descr:(NSString *)descr   link:(NSStrin
   UMSocialPlatformType plf = [self platformType:platform];
   if (plf == UMSocialPlatformType_UnKnown) {
     if (completion) {
-      completion(@[@(UMSocialPlatformType_UnKnown), @"invalid platform"]);
+      completion(@[ @"invalid platform"]);
       return;
     }
   }
@@ -193,9 +193,9 @@ RCT_EXPORT_METHOD(share:(NSString *)text descr:(NSString *)descr   link:(NSStrin
         if(stcode == 2009){
          stcode = -1;
         }
-        completion(@[@(stcode), msg]);
+        completion(@[ msg]);
       } else {
-        completion(@[@200, @"share success"]);
+        completion(@[@"share success"]);
       }
     }
   }];
@@ -212,7 +212,7 @@ RCT_EXPORT_METHOD(openWeiapp:(NSString *)appId path:(NSString *)path userName:(N
   launchMiniProgramReq.miniProgramType = miniProgramType; //拉起小程序的类型
     return  [WXApi sendReq:launchMiniProgramReq completion:^(BOOL success)  {
         if (completion) {
-            completion(@[@200, @"share success"]);
+            completion(@[@"share success"]);
         }
     }];
 }
@@ -223,7 +223,7 @@ RCT_EXPORT_METHOD(authLogin:(NSInteger)platform completion:(RCTResponseSenderBlo
   UMSocialPlatformType plf = [self platformType:platform];
   if (plf == UMSocialPlatformType_UnKnown) {
     if (completion) {
-      completion(@[@(UMSocialPlatformType_UnKnown), @"invalid platform"]);
+      completion(@[ @"invalid platform"]);
       return;
     }
   }
@@ -241,11 +241,12 @@ RCT_EXPORT_METHOD(authLogin:(NSInteger)platform completion:(RCTResponseSenderBlo
         if(stCode == 2009){
           stCode = -1;
         }
-        completion(@[@(stCode), @{}, msg]);
+        completion(@[msg]);
       } else {
         UMSocialUserInfoResponse *authInfo = result;
 
         NSMutableDictionary *retDict = [NSMutableDictionary dictionaryWithCapacity:8];
+          retDict[@"code"] = @(0);
           retDict[@"userId"] = authInfo.uid;
           retDict[@"openid"] = authInfo.openid;
           retDict[@"unionid"] = authInfo.unionId;
@@ -262,7 +263,7 @@ RCT_EXPORT_METHOD(authLogin:(NSInteger)platform completion:(RCTResponseSenderBlo
         retDict[@"province"] = originInfo[@"province"];
         retDict[@"country"] = originInfo[@"country"];
 
-        completion(@[@200, retDict, @""]);
+        completion(@[retDict]);
       }
     }
   }];
