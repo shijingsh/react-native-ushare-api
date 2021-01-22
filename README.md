@@ -328,9 +328,23 @@ https://developer.apple.com/documentation/safariservices/supporting_associated_d
 2.在ios13之前的设备可以通过universal link打开app，但是ios14不能打开了
 
 原因是在ios13访问apple-app-site-association文件是通过设备去访问的，ios14之后是由apple的服务器区去访问。我们的问题是设备在本地网络下能访问到apple-app-site-association文件，但是苹果服务器访问走的是海外网络，ssl证书有问题导致不能访问到apple-app-site-association文件。修改这个问题之后就能顺利的打开app了。
-
-
-
+```json
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "DHJ4UU24CJ.com.xxxx.test.xiushangApp", 
+                "paths": ["/xiushangApp/*"]
+            },
+             {
+                            "appID": "DHJ4UU24CJ.com.xxx.xiushangApp",
+                            "paths": ["/xiushangApp/*"]
+             }
+        ]
+    }
+}
+```
 ## License
 
 _MIT_
