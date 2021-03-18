@@ -276,7 +276,9 @@ RCT_EXPORT_METHOD(authLogin:(NSInteger)platform completion:(RCTResponseSenderBlo
 //分享小程序
 RCT_EXPORT_METHOD(shareWeiapp:(NSString *)title descr:(NSString *)descr
                   link:(NSString *)link icon:(NSString *)icon
-                  platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
+                  platform:(NSInteger)platform
+                  userName:(NSString *)userName path:(NSString *)path
+                   completion:(RCTResponseSenderBlock)completion)
 {
     UMSocialPlatformType plf = [self platformType:platform];
     if (plf == UMSocialPlatformType_UnKnown) {
@@ -285,14 +287,16 @@ RCT_EXPORT_METHOD(shareWeiapp:(NSString *)title descr:(NSString *)descr
         return;
       }
     }
+    NSData * dataImage = [NSData dataWithContentsOfURL:[NSURL URLWithString:icon]];
+    UIImage * resultImage =  [UIImage imageWithData:dataImage];
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
 
-    UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:title descr:descr thumImage:[UIImage imageNamed:@"icon"]];
+    UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:title descr:descr thumImage:resultImage];
     shareObject.webpageUrl = link;
-    shareObject.userName = @"gh_3ac2059ac66f";
-    shareObject.path = @"pages/page10007/page10007";
-    shareObject.hdImageData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"png"]];
+    shareObject.userName = userName;
+    shareObject.path = path;
+    shareObject.hdImageData = dataImage;
     shareObject.miniProgramType = UShareWXMiniProgramTypeRelease;
     messageObject.shareObject = shareObject;
 
