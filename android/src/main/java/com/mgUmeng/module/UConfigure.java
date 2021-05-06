@@ -16,6 +16,8 @@ import com.umeng.socialize.UMShareAPI;
  */
 public class UConfigure {
 
+    public static String WX_APPID ;
+
     public static void onActivityResult(Context context,int requestCode, int resultCode, Intent data){
         UMShareAPI.get(context).onActivityResult(requestCode, resultCode, data);
     }
@@ -39,6 +41,7 @@ public class UConfigure {
     }
 
     public static void  setWeixin(String s1,String s2){
+        WX_APPID = s1;
         PlatformConfig.setWeixin(s1, s2);
     }
     public static void  setQQZone(String s1,String s2){
@@ -47,4 +50,6 @@ public class UConfigure {
     public static void  setSinaWeibo(String s1,String s2,String s3){
         PlatformConfig.setSinaWeibo(s1, s2,s3);
     }
+
+
 }

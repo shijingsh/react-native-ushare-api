@@ -37,8 +37,8 @@ import com.alipay.sdk.app.PayTask;
 import com.alipay.sdk.app.EnvUtils;
 
 import com.tencent.mm.opensdk.modelpay.PayReq;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.Arguments;
 
 
 public class UShareModule extends ReactContextBaseJavaModule implements ActivityEventListener {
@@ -92,7 +92,7 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
 
         final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
         if(UMShareAPI.get(mActivity).isInstall(mActivity, sharePlatform)) {
-             UMImage image = null;
+            UMImage image = null;
             if(imgPath.startsWith("http")){
                 Bitmap img = BitmapFactory.decodeFile(BitMapUtil.getImageAbsolutePath(mActivity, Uri.parse(imgPath)));
                 image =  new UMImage(mActivity, BitMapUtil.ImageCompress(img));
@@ -392,14 +392,14 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
         IWXAPI api = WXAPIFactory.createWXAPI(getCurrentActivity(), params.getString("wxAppId"));
         //data  根据服务器返回的json数据创建的实体类对象
         PayReq req = new PayReq();
-        req.appId = WX_APPID;
+        req.appId = UConfigure.WX_APPID;
         req.partnerId = params.getString("partnerId");
         req.prepayId = params.getString("prepayId");
         req.packageValue = params.getString("packageValue");
         req.nonceStr = params.getString("nonceStr");
         req.timeStamp = params.getString("timeStamp");
         req.sign = params.getString("sign");
-        api.registerApp(WX_APPID);
+        api.registerApp(UConfigure.WX_APPID);
         XWXPayEntryActivity.callback = new WXPayCallBack() {
             @Override
             public void callBack(WritableMap result) {
