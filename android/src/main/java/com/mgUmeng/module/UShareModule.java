@@ -33,6 +33,13 @@ import com.umeng.socialize.media.UMWeb;
 
 import java.util.Map;
 
+import com.alipay.sdk.app.PayTask;
+import com.alipay.sdk.app.EnvUtils;
+
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
 
 public class UShareModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
@@ -351,6 +358,57 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
 
     }
 
+
+    @ReactMethod
+    public void setAlipaySandbox(Boolean isSandbox) {
+        if(isSandbox){
+            EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
+        }else {
+            EnvUtils.setEnv(EnvUtils.EnvEnum.ONLINE);
+        }
+    }
+
+    @ReactMethod
+    public void alipay(final String orderInfo, final Callback promise) {
+        Runnable payRunnable = new Runnable() {
+            @Override
+            public void run() {
+                PayTask alipay = new PayTask(getCurrentActivity());
+                Map<String, String> result = alipay.payV2(orderInfo, true);
+                WritableMap map = Arguments.createMap();
+                map.putString("memo", result.get("memo"));
+                map.putString("result", result.get("result"));
+                map.putString("resultStatus", result.get("resultStatus"));
+                promise.invoke(map);
+            }
+        };
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+    @ReactMethod
+    public void wxPay(ReadableMap params, final Callback callback) {
+        IWXAPI api = WXAPIFactory.createWXAPI(getCurrentActivity(), params.getString("wxAppId"));
+        //data  根据服务器返回的json数据创建的实体类对象
+        PayReq req = new PayReq();
+        req.appId = WX_APPID;
+        req.partnerId = params.getString("partnerId");
+        req.prepayId = params.getString("prepayId");
+        req.packageValue = params.getString("packageValue");
+        req.nonceStr = params.getString("nonceStr");
+        req.timeStamp = params.getString("timeStamp");
+        req.sign = params.getString("sign");
+        api.registerApp(WX_APPID);
+        XWXPayEntryActivity.callback = new WXPayCallBack() {
+            @Override
+            public void callBack(WritableMap result) {
+                callback.invoke(result);
+            }
+        };
+        //发起请求
+        api.sendReq(req);
+    }
 
     /**
      * 分享或登录处理后的回调

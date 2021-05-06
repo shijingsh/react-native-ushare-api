@@ -1,7 +1,7 @@
 {
   "name": "react-native-ushare-api",
-  "version": "2.3.8",
-  "description": "react-native umeng share api",
+  "version": "2.4.0",
+  "description": "react-native umeng share,auth,wxPay,aliPay",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
