@@ -389,7 +389,7 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
 
     @ReactMethod
     public void wxPay(ReadableMap params, final Callback callback) {
-        IWXAPI api = WXAPIFactory.createWXAPI(getCurrentActivity(), params.getString("wxAppId"));
+        IWXAPI api = WXAPIFactory.createWXAPI(getCurrentActivity(), UConfigure.WX_APPID);
         //data  根据服务器返回的json数据创建的实体类对象
         PayReq req = new PayReq();
         req.appId = UConfigure.WX_APPID;
