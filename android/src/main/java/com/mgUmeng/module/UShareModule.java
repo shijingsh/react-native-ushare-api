@@ -93,7 +93,7 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
         final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
         if(UMShareAPI.get(mActivity).isInstall(mActivity, sharePlatform)) {
             UMImage image = null;
-            if(imgPath.startsWith("http")){
+            if(!imgPath.startsWith("http")){
                 Bitmap img = BitmapFactory.decodeFile(BitMapUtil.getImageAbsolutePath(mActivity, Uri.parse(imgPath)));
                 image =  new UMImage(mActivity, BitMapUtil.ImageCompress(img));
             }else{
