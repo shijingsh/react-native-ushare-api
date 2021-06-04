@@ -398,6 +398,7 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
         req.packageValue = params.getString("packageValue");
         req.nonceStr = params.getString("nonceStr");
         req.timeStamp = params.getString("timeStamp");
+        req.signType = params.getString("signType");
         req.sign = params.getString("sign");
         api.registerApp(UConfigure.WX_APPID);
         XWXPayEntryActivity.callback = new WXPayCallBack() {
