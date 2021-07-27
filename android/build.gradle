@@ -27,6 +27,11 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
@@ -46,9 +51,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.12'//QQ SDK在3.53.0版本及以上时需要集成okhttp官方依赖库，必选
 
     implementation 'com.umeng.umsdk:share-sina:7.1.5'//新浪微博完整版
-    implementation 'com.sina.weibo.sdk:core:10.10.0:openDefaultRelease@aar'//新浪微博官方SDK依赖库，必选，如在线集成失败请本地下载离线包https://counsel.umeng.com/api/activity/download?fileName=activity/67/openDefault-10.10.0.aar
+    //implementation 'com.sina.weibo.sdk:core:10.10.0:openDefaultRelease@aar'//新浪微博官方SDK依赖库，必选，如在线集成失败请本地下载离线包https://counsel.umeng.com/api/activity/download?fileName=activity/67/openDefault-10.10.0.aar
     //implementation 'com.umeng.umsdk:share-dingding:7.1.5'//钉钉完整版
     //implementation  "com.alibaba.android:ddsharesdk:1.2.0@jar"//钉钉官方依赖库，必选
     //implementation  'com.umeng.umsdk:share-alipay:7.1.5'//支付宝完整版
+    implementation(name:'openDefault-10.10.0', ext:'aar')
 
 }
