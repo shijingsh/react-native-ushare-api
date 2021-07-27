@@ -105,6 +105,20 @@ yarn add react-native-ushare-api
 ```
 
 #### android
+
+#### app build.gradle add
+```
+allprojects {
+    repositories {
+        ...
+        maven { url  'https://repo1.maven.org/maven2/'}
+        flatDir {
+            dirs project(':react-native-ushare-api').file('libs'), 'libs'
+        }
+    }
+}
+```
+
 ```
 import com.mgUmeng.module.wxapi.WXEntryUShareActivity;
 
