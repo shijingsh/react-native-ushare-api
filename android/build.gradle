@@ -39,12 +39,13 @@ dependencies {
 
     implementation  'com.umeng.umsdk:common:9.4.0'//必选
     implementation  'com.umeng.umsdk:asms:1.2.3'//必选
+    implementation  'com.umeng.umsdk:apm:1.4.0'//错误分析sdk
 
     implementation  'com.umeng.umsdk:share-core:7.1.5'//分享核心库，必选
     //implementation  'com.umeng.umsdk:share-board:7.1.5'//分享面板功能，可选
 
-    implementation 'com.umeng.umsdk:share-wx:7.1.5' //微信完整版
-    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.7.0'//微信官方依赖库，必选
+    api 'com.umeng.umsdk:share-wx:7.1.5' //微信完整版
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'//微信官方依赖库，必选
 
     implementation 'com.umeng.umsdk:share-qq:7.1.5'//QQ完整版
     implementation 'com.tencent.tauth:qqopensdk:3.53.0'//QQ官方依赖库，必选
