@@ -21,6 +21,7 @@ import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.mgUmeng.module.utils.BitMapUtil;
+import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
@@ -63,6 +64,17 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
     @Override
     public String getName() {
         return "umengShareApi";
+    }
+
+    @ReactMethod
+    public void initSDK(String appkey, String channel, int type, String secret,Callback callback) {
+
+        UConfigure.init(this.context, appkey, channel, type, secret);
+
+        if(callback!=null){
+            callback.invoke("success");
+        }
+
     }
 
     @ReactMethod

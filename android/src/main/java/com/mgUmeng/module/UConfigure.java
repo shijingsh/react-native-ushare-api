@@ -22,11 +22,17 @@ public class UConfigure {
         UMShareAPI.get(context).onActivityResult(requestCode, resultCode, data);
     }
 
-    public static void init(Context context, String appkey, String channel, int type, String secret){
+    public static void preInit(Context context, String appKey, String channel){
+
+        UMConfigure.preInit(context,appKey,channel);
+    }
+
+    public static void init(Context context, String appKey, String channel, int type, String secret){
         initRN("react-native","2.0");
         Config.shareType = "react native";
-        UMConfigure.init(context,appkey,channel,type,secret);
+        UMConfigure.init(context,appKey,channel,type,secret);
     }
+
     @TargetApi(VERSION_CODES.KITKAT)
     private static void initRN(String v, String t){
         Method method = null;
