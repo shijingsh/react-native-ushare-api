@@ -34,6 +34,13 @@ import UShare from "react-native-ushare-api";
 
 ### Call share
 
+//初始化sdk,用于延长初始化，需在用户同意隐私协议后调用。
+```javascript
+        UShare.initSDK("5fe93e0544bb94418a66cc9f", "umeng", 1, "",function (data) {
+
+        });
+``` 
+
 ```javascript
 const SharePlatform = {
     QQ: 0,
@@ -161,7 +168,9 @@ public class WXEntryActivity extends WXEntryUShareActivity {
 
         //Config.shareType = "react native";
         // 初始化Umeng分享
-        UConfigure.init(this, "9636538", "umeng", 1, "");
+        UConfigure.init(this, "xxxx", "umeng", 1, "");
+        // 延迟初始化时使用如下
+        UConfigure.preInit(this, "xxxxx", "umeng");
     }
 
     {

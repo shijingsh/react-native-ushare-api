@@ -6,12 +6,6 @@
                 android:name="UMENG_APPKEY"
                 android:value="${UmengAppKey}"></meta-data>
 
-        <activity
-                android:name=".wxapi.WXEntryActivity"
-                android:configChanges="keyboardHidden|orientation|screenSize"
-                android:exported="true"
-                android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <!-- QQ -->
         <activity
                 android:name="com.tencent.tauth.AuthActivity"
@@ -30,7 +24,7 @@
         /><!--  android:configChanges="orientation|keyboardHidden|screenSize" -->
         <provider
                 android:authorities="${applicationId}.fileprovider"
-                android:name="android.support.v4.content.FileProvider"
+                android:name="androidx.core.content.FileProvider"
                 android:exported="false"
                 android:grantUriPermissions="true"
         >

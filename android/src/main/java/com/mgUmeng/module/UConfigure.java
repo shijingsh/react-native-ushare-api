@@ -46,6 +46,10 @@ public class UConfigure {
         }
     }
 
+    public static void  setLogEnabled(boolean flag){
+        UMConfigure.setLogEnabled(flag);
+    }
+
     public static void  setWeixin(String s1,String s2){
         WX_APPID = s1;
         PlatformConfig.setWeixin(s1, s2);
@@ -57,5 +61,19 @@ public class UConfigure {
         PlatformConfig.setSinaWeibo(s1, s2,s3);
     }
 
+    public static void  setFileProvider(String s1){
+        PlatformConfig.setWXFileProvider(s1);
+        PlatformConfig.setQQFileProvider(s1);
+        PlatformConfig.setSinaFileProvider(s1);
+    }
+
+    /**
+     * 防止内存泄露
+     * 在使用分享或者授权的Activity中，重写onDestory()方法：
+     * @param context
+     */
+    public static void release(Context context){
+        UMShareAPI.get(context).release();
+    }
 
 }
