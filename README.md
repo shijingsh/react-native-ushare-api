@@ -46,7 +46,7 @@ import UShare from "react-native-ushare-api";
 
 //初始化sdk,用于延长初始化，需在用户同意隐私协议后调用。
 ```javascript
-        UShare.initSDK("5fe93e0544bb94418a66cc9f", "umeng", 1, "",function (data) {
+        UShare.initSDK("xxxxxxxxxxx", "umeng", 1, "",function (data) {
 
         });
 ``` 
@@ -133,7 +133,7 @@ allprojects {
 
 #### app build.gradle defaultConfig add
 ```
-manifestPlaceholders = [UmengAppKey: "\\09636538",QQAppId: "tencent11023232",qqappid:"tencent11023232"]
+manifestPlaceholders = [UmengAppKey: "\\xxxxxxx",QQAppId: "xxxxxxxx",qqappid:"xxxxxxxx"]
 ```
 
 ```
@@ -205,14 +205,14 @@ public class WXEntryActivity extends WXCallbackActivity {
       // 日志
       UConfigure.setLogEnabled(true);
       // 初始化Umeng分享
-      UConfigure.init(getApplicationContext(), "5fe93e0544bb94418a66cc9f", "umeng", 1, "");
+      UConfigure.init(getApplicationContext(), "xxxxxxxxxxx", "umeng", 1, "");
       // 延长初始化Umeng分享
-      //UConfigure.preInit(this, "5fe93e0544bb94418a66cc9f", "umeng");
+      //UConfigure.preInit(this, "xxxxxxxxxxx", "umeng");
       
 
-      UConfigure.setWeixin("wx37508906e9cb2cda", "e53dcbd6ab70402b757a59d4b7a10c83");
-      UConfigure.setQQZone("1106747599", "ihDC3Ox2y64EWteF");
-      UConfigure.setSinaWeibo("652858587", "fd9b6e1035d2a865e624257cfebce847", "www.baidu.com");
+      UConfigure.setWeixin("xxxxxxxxxxx", "xxxxxxxxxxx");
+      UConfigure.setQQZone("xxxxxxxxxxx", "xxxxxxxxxxx");
+      UConfigure.setSinaWeibo("xxxxxxxxxxx", "xxxxxxxxxxx", "www.baidu.com");
       UConfigure.setFileProvider("com.xiushangapp.fileprovider");
     }
 ```
