@@ -1,6 +1,6 @@
 # react-native-ushare-api
 
-iOS/Android umeng share api
+ react-native umeng share,auth,weiApp,wxPay,aliPay
 
 ## Result
 
