@@ -32,6 +32,9 @@ npm i react-native-ushare-api --save
 yarn add react-native-ushare-api
 ```
 
+### example
+
+https://github.com/shijingsh/react-native-ushare-api-example
 
 ### Import library
 
