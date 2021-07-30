@@ -21,7 +21,6 @@ import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.mgUmeng.module.utils.BitMapUtil;
-import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
@@ -45,12 +44,8 @@ import com.facebook.react.bridge.Arguments;
 public class UShareModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
     private Context context;
-    private static Activity mActivity;
     private static Handler mHandler = new Handler(Looper.getMainLooper());
 
-    public static void initActivity(Activity activity) {
-        mActivity = activity;
-    }
 
     public UShareModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -103,6 +98,7 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
     public void shareImg(String imgPath, final int platform, final Callback resultCallback) {
 
         final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
+        Activity mActivity = getCurrentActivity();
         if(UMShareAPI.get(mActivity).isInstall(mActivity, sharePlatform)) {
             UMImage image = null;
             if(!imgPath.startsWith("http")){
@@ -146,6 +142,7 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
     public void shareText(String text, final int platform, final Callback resultCallback) {
 
         final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
+        Activity mActivity = getCurrentActivity();
         if(UMShareAPI.get(mActivity).isInstall(mActivity, sharePlatform)) {
 
             if(platform==0){
@@ -221,6 +218,7 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
     public void share(String title, String description, String contentUrl,
                       String imgUrl, final int platform, final Callback resultCallback) {
         final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
+        Activity mActivity = getCurrentActivity();
         if(UMShareAPI.get(mActivity).isInstall(mActivity, sharePlatform)) {
             final UMWeb web = new UMWeb(contentUrl);
             web.setTitle(title); //标题
@@ -279,6 +277,7 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
                             String imgUrl, final int platform,String path,String user_name, final Callback resultCallback){
 
         final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
+        Activity mActivity = getCurrentActivity();
 
         UMMin umMin = new UMMin(contentUrl);
         umMin.setThumb(new UMImage(context, imgUrl));
@@ -323,6 +322,7 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
 
         final WritableMap result = new WritableNativeMap();
         final SHARE_MEDIA sharePlatform = getSharePlatform(platform);
+        Activity mActivity = getCurrentActivity();
 
         if(UMShareAPI.get(mActivity).isInstall(mActivity, sharePlatform)) {
             UMShareAPI.get(mActivity).getPlatformInfo(mActivity, sharePlatform, new UMAuthListener() {
@@ -431,6 +431,7 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
      * @param data
      */
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+        Activity mActivity = getCurrentActivity();
         UMShareAPI.get(mActivity).onActivityResult(requestCode, resultCode, data);
     }
 
@@ -459,9 +460,5 @@ public class UShareModule extends ReactContextBaseJavaModule implements Activity
             default:
                 return null;
         }
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        UMShareAPI.get(mActivity).onActivityResult(requestCode, resultCode, data);
     }
 }

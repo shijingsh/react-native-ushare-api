@@ -25,8 +25,15 @@ iOS/Android umeng share api
   </a>
 </p>
 
+## Install
 
-#### Import library
+```
+npm i react-native-ushare-api --save
+yarn add react-native-ushare-api
+```
+
+
+### Import library
 
 ```javascript
 import UShare from "react-native-ushare-api";
@@ -104,20 +111,15 @@ const SharePlatform = {
          });
  ```      
     
-## Install
 
-```
-npm i react-native-ushare-api --save
-yarn add react-native-ushare-api
-```
-
-#### android
+### android
 
 #### app build.gradle add
 ```
 allprojects {
     repositories {
         ...
+        mavenCentral()
         maven { url  'https://repo1.maven.org/maven2/'}
         flatDir {
             dirs project(':react-native-ushare-api').file('libs'), 'libs'
@@ -126,10 +128,16 @@ allprojects {
 }
 ```
 
+#### app build.gradle defaultConfig add
 ```
-import com.mgUmeng.module.wxapi.WXEntryUShareActivity;
+manifestPlaceholders = [UmengAppKey: "\\09636538",QQAppId: "tencent11023232",qqappid:"tencent11023232"]
+```
 
-public class WXEntryActivity extends WXEntryUShareActivity {
+```
+import com.umeng.socialize.weixin.view.WXCallbackActivity;
+
+public class WXEntryActivity extends WXCallbackActivity {
+
 }
 ```
 
@@ -137,11 +145,31 @@ public class WXEntryActivity extends WXEntryUShareActivity {
 #### add action in AndroidManifest.xml
 
 ```
+  <queries>
+        <package android:name="com.tencent.mm" />
+        <package android:name="com.tencent.mobileqq" />
+        <package android:name="com.tencent.wework" />
+        <package android:name="com.qzone" />
+        <package android:name="com.sina.weibo" />
+        <package android:name="com.alibaba.android.rimet" />
+        <package android:name="com.eg.android.AlipayGphone" />
+    </queries>
+
+    <application
+      android:name=".MainApplication"
+      android:label="@string/app_name"
+      android:icon="@mipmap/ic_launcher"
+      android:roundIcon="@mipmap/ic_launcher_round"
+      android:allowBackup="false"
+      android:theme="@style/AppTheme">
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        ...
+    </application>
 ```
 
 #### add init in activity
@@ -149,14 +177,19 @@ public class WXEntryActivity extends WXEntryUShareActivity {
   public void onCreate(Bundle savedInstanceState) {
 
     super.onCreate(savedInstanceState);
-
-    UShareModule.initActivity(this);
   }
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     UConfigure.onActivityResult(this,requestCode, resultCode, data);
+  }
+
+  @Override
+  protected void onDestroy(){
+    super.onDestroy();
+    //防止内存泄露
+    UConfigure.release(this);
   }
 ```
 
@@ -166,19 +199,21 @@ public class WXEntryActivity extends WXEntryUShareActivity {
         SoLoader.init(this, /* native exopackage */ false);
         initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
 
-        //Config.shareType = "react native";
-        // 初始化Umeng分享
-        UConfigure.init(this, "xxxx", "umeng", 1, "");
-        // 延迟初始化时使用如下
-        UConfigure.preInit(this, "xxxxx", "umeng");
-    }
+      // 日志
+      UConfigure.setLogEnabled(true);
+      // 初始化Umeng分享
+      UConfigure.init(getApplicationContext(), "5fe93e0544bb94418a66cc9f", "umeng", 1, "");
+      // 延长初始化Umeng分享
+      //UConfigure.preInit(this, "5fe93e0544bb94418a66cc9f", "umeng");
+      
 
-    {
-        UConfigure.setWeixin("", "");
-        UConfigure.setQQZone("", "");
-        UConfigure.setSinaWeibo("", "", "www.baidu.com");
+      UConfigure.setWeixin("wx37508906e9cb2cda", "e53dcbd6ab70402b757a59d4b7a10c83");
+      UConfigure.setQQZone("1106747599", "ihDC3Ox2y64EWteF");
+      UConfigure.setSinaWeibo("652858587", "fd9b6e1035d2a865e624257cfebce847", "www.baidu.com");
+      UConfigure.setFileProvider("com.xiushangapp.fileprovider");
     }
 ```
+
 ### iOS
 
 
