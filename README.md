@@ -224,7 +224,8 @@ public class WXEntryActivity extends WXCallbackActivity {
 #### info.plist add the following to the file
 
 ```xml
-<array>
+    <key>CFBundleURLTypes</key>
+    <array>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
