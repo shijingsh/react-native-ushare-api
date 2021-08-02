@@ -341,7 +341,7 @@ RCT_EXPORT_METHOD(shareImageToPlatformType:(UMSocialPlatformType)platformType wi
 
 
 
-RCT_EXPORT_METHOD(initSDK:(NSString *)str1 str2:(NSString *)str2 str3:(NSString *)str3  str4:(NSString *)str4 completion:(RCTResponseSenderBlock)completion)
+RCT_EXPORT_METHOD(initSDK:(NSString *)str1 str2:(NSString *)str2 str3:(NSInteger *)str3  str4:(NSString *)str4 completion:(RCTResponseSenderBlock)completion)
 {
 
     if (completion) {

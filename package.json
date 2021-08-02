@@ -1,6 +1,6 @@
 {
   "name": "react-native-ushare-api",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "react-native umeng share,auth,wxPay,aliPay",
   "main": "index.js",
   "scripts": {
