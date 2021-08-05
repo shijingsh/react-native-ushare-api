@@ -10,6 +10,7 @@
 #import <UMShare/UMShare.h>
 #import <React/RCTConvert.h>
 #import <React/RCTEventDispatcher.h>
+#import <UMCommon/UMCommon.h>
 
 #import <UMShare/WXApi.h>
 @implementation RCTumengShareApi
@@ -344,6 +345,7 @@ RCT_EXPORT_METHOD(shareImageToPlatformType:(UMSocialPlatformType)platformType wi
 RCT_EXPORT_METHOD(initSDK:(NSString *)str1 str2:(NSString *)str2 str3:(NSInteger *)str3  str4:(NSString *)str4 completion:(RCTResponseSenderBlock)completion)
 {
 
+    [UMConfigure initWithAppkey:str1 channel:str2 ];
     if (completion) {
         completion(@[@"success"]);
     }
