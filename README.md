@@ -373,13 +373,13 @@ pod install
 
 #### UniversalLink
 
-Universal links失效，可能原因：
+1、Universal links失效，可能原因：
 
 
-1）工程配置associated domain未打开或未添加Universal links域名
-2）配置文件未上线或未按苹果要求放在服务器指定的路径下(root/.well-known/apple-app-site-association)
-3）配置文件的Universal links的path末尾没有加通配符*
-4）配置文件的appID（teamID+bundleID）与实际代码包不匹配
+- 1）工程配置associated domain未打开或未添加Universal links域名
+- 2）配置文件未上线或未按苹果要求放在服务器指定的路径下(root/.well-known/apple-app-site-association)
+- 3）配置文件的Universal links的path末尾没有加通配符*
+- 4）配置文件的appID（teamID+bundleID）与实际代码包不匹配
 
 注意必须.well-known目录下
 https:///.well-known/apple-app-site-association
