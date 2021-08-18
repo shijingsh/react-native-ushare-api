@@ -309,19 +309,6 @@ RCT_EXPORT_METHOD(shareWeiapp:(NSString *)title descr:(NSString *)descr
 }
 
 
-- getImage:(NSString*) icon {
-    id img = nil;
-    if ([icon hasPrefix:@"http"]) {
-      img = icon;
-    } else {
-      if ([icon hasPrefix:@"/"]) {
-        img = [UIImage imageWithContentsOfFile:icon];
-      } else {
-        img = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:icon ofType:nil]];
-      }
-    }
-    return img;
-}
 
 RCT_EXPORT_METHOD(shareImg:(NSString*) path  platform:(NSInteger)platform completion:(RCTResponseSenderBlock)completion)
 {
@@ -338,9 +325,8 @@ RCT_EXPORT_METHOD(shareImg:(NSString*) path  platform:(NSInteger)platform comple
     //创建图片内容对象
     UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
     //如果有缩略图，则设置缩略图本地
-    //shareObject.thumbImage = thumb;
-    UIImage* image = [self getImage:path];
-    [shareObject setShareImage:image];
+    shareObject.thumbImage = path;
+    [shareObject setShareImage:path];
 
     // 设置Pinterest参数
    // if (platformType == UMSocialPlatformType_Pinterest) {
@@ -355,7 +341,7 @@ RCT_EXPORT_METHOD(shareImg:(NSString*) path  platform:(NSInteger)platform comple
     messageObject.shareObject = shareObject;
 
     //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:plf messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+    [[UMSocialManager defaultManager] shareToPlatform:plf messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
 
 
     }];
